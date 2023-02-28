@@ -1,0 +1,36 @@
+.wrapper {
+    max-width: 46rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+
+@media (max-width:768px) {
+
+    html {
+        font-size: 87.5%;
+    }
+
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    margin-top: calc(0px - 4rem);
+    justify-content: center;
+    gap: 8px;
+}
+
+.searchContainer button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+
+.searchContainer input {
+    width: 100%;
+}

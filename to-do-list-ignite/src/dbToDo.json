@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "isChecked": false
+    },
+    {
+        "id": 2,
+        "content": "In hendrerit turpis lacinia magna malesuada, ac consequat augue consequat.",
+        "isChecked": false
+    },
+    {
+        "id": 3,
+        "content": "Proin at nisl ut mauris placerat fringilla.",
+        "isChecked": false
+    },
+    {
+        "id": 4,
+        "content": "Nam non sodales lorem.",
+        "isChecked": false
+    },
+    {
+        "id": 5,
+        "content": "Mauris pulvinar ligula at tortor blandit, ac lobortis arcu rhoncus.",
+        "isChecked": true
+    }
+]
