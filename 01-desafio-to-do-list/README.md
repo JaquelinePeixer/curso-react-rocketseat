@@ -1,16 +1,16 @@
-# ToDo List - Desafio Ignite
+# ToDo List - Desafio 01 Ignite
 ![Capa do desafio](Capa.png)
 
 # Sobre o desafio
 
-Nesse desafio, você vai desenvolver uma aplicação de controle de tarefas no estilo **to-do list**, que contém as seguintes funcionalidades:
+Nesse desafio, vai ser desenvolvido uma aplicação de controle de tarefas no estilo **to-do list**, que contém as seguintes funcionalidades:
 
 - Adicionar uma nova tarefa
 - Marcar e desmarcar uma tarefa como concluída
 - Remover uma tarefa da listagem
 - Mostrar o progresso de conclusão das tarefas
 
-Apesar de serem poucas funcionalidades, você vai precisar relembrar conceitos como:
+Apesar de serem poucas funcionalidades, foi relembado alguns conceitos como:
 
 - Estados
 - Imutabilidade do estado
@@ -20,4 +20,4 @@ Apesar de serem poucas funcionalidades, você vai precisar relembrar conceitos c
 
 # Layout da aplicação
 
-Para essa aplicação nós fornecemos um layout para que você possa seguir e implementar todas as funcionalidades desenhadas no figma.
+Foi fornecido pela equipe Rocketseat via figma.
