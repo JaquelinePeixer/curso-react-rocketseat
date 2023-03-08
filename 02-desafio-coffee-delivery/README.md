@@ -1,5 +1,5 @@
 # [Em desenvolvimento] Coffee Delivery - Desafio 02 Ignite
-![Página inicial do desafio](coffee_delivery_home.png)
+![Capa Coffee Delivery](Capa.png)
 
 # Sobre o desafio
 
