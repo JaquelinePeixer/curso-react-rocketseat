@@ -1,6 +1,6 @@
 import { AmountCart, CatalogItem } from "./styles";
 import { ShoppingCart, Minus, Plus } from 'phosphor-react';
-import catalog from '../../../service/catalog.json'
+import catalog from '../../../../service/catalog.json'
 
 export function ListCatalog() {
 

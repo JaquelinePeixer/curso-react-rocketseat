@@ -17,27 +17,23 @@
     --primary-light: #EBE5F9;
 }
 
+.col-12{
+    width: 100%;
+}
 
-.amount{
-    background-color: red;
-    color:red;
-    border: 0px;
-    border-radius: 6px;
+.col-8{
+    width: 62%;
+}
 
-    button {
-        display: flex;
-        gap: 5px;
-        border: 0;
-        padding: 2px 4px;
-        color: red;
-        font-size: 1.5rem;
+.col-4{
+    width: 35%;
+}
 
-        &:first-child{
-            padding-left: 10px;
-        }
+.col-2{
+    width: 10%;
+}
 
-        &:last-child{
-            padding-right: 10px;
-        }
-    }
+
+input{
+    border: 1px solid --secondary-dark;
 }
