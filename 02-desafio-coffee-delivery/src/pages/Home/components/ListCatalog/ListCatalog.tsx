@@ -13,8 +13,10 @@ export function ListCatalog() {
 
     function addOrder(item: any) {
 
-        let newList = listOrderDelivery.push(item)
-        setListOrderDelivery(newList)
+        // let newList = listOrderDelivery.push(item)
+        // setListOrderDelivery(newList)
+
+        setListOrderDelivery(newList => [...newList, item])
 
         console.log('addOrder', listOrderDelivery)
         debugger
