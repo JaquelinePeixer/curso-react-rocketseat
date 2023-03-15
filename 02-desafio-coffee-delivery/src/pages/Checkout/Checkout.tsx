@@ -1,13 +1,13 @@
 import { CheckoutCard, CheckoutContainer, ItemOptionPayment, OrderItem, ResumeDelivery, TotalDelivery } from "./styles";
 import { CurrencyDollar, MapPinLine, CreditCard, Bank, Money, Minus, Plus, Trash } from 'phosphor-react';
-import payment from '../../service/payment.json'
+import PaymentService from '../../service/PaymentService.json'
 import { AmountCart } from "../Home/components/ListCatalog/styles";
 
 export function Checkout() {
 
     let quantity = 1
 
-    let listPayment = payment
+    let listPayment = PaymentService
 
     let listDelivery = [
         {

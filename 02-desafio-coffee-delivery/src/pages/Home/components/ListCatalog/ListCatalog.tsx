@@ -1,12 +1,33 @@
 import { AmountCart, CatalogItem } from "./styles";
 import { ShoppingCart, Minus, Plus } from 'phosphor-react';
-import catalog from '../../../../service/catalog.json'
+import CatalogService from '../../../../service/CatalogService.json'
+import { useEffect, useState } from "react";
+import { Order, OrderList } from "../../../../interface/interface";
 
 export function ListCatalog() {
 
-    let catalogList = catalog
-    let quantity = 1
+    let catalogList = CatalogService
 
+    const [listOrderDelivery, setListOrderDelivery] = useState([])
+
+
+    function addOrder(item: any) {
+
+        let newList = listOrderDelivery.push(item)
+        setListOrderDelivery(newList)
+
+        console.log('addOrder', listOrderDelivery)
+        debugger
+    }
+
+    function removeOrder(item: any) {
+        console.log('removeOrder', listOrderDelivery)
+    }
+
+    function salveLocalStorage(data: any) {
+        const stateJson = JSON.stringify(data)
+        localStorage.setItem('@coffe-delivery-order', stateJson)
+    }
 
     return (
         <div className="listCatalog">
@@ -33,10 +54,10 @@ export function ListCatalog() {
 
                             <div className="amountCart">
                                 <div className="amount">
-                                    <button>
+                                    <button onClick={() => removeOrder(item)} type="button" >
                                         <Minus size={14} weight="light" />
                                     </button>
-                                    <span>{quantity}</span>
+                                    <span>{listOrderDelivery.length}</span>
                                     <button>
                                         <Plus size={14} weight="light" />
                                     </button>
