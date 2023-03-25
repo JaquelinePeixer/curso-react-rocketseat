@@ -1,8 +1,9 @@
 export interface OrderList {
+    id: number,
     order: Order[],
-    andressDelivery: Adress,
-    paygmentDeivery: Payment,
-    deliveryTimer: string
+    andressDelivery?: Adress,
+    paygmentDeivery?: Payment,
+    deliveryTimer?: string
 }
 
 export interface Order {
@@ -16,7 +17,8 @@ export interface Order {
     ],
     title: string,
     subtitle: string,
-    price: number
+    price: number,
+    quantity: number
 }
 
 export interface Adress {

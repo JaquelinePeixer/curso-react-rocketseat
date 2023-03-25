@@ -84,6 +84,10 @@ export const AmountCart = styled.div`
                 color: ${props => props.theme['primary']};
                 display: flex;
                 align-items: center;
+
+                &:hover{
+                    cursor: pointer
+                }
             }
         }
     }
