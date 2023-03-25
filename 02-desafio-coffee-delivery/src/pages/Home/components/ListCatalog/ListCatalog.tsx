@@ -1,84 +1,22 @@
 import { AmountCart, CatalogItem } from "./styles";
 import { ShoppingCart, Minus, Plus } from 'phosphor-react';
-import CatalogService from '../../../../service/CatalogService.json'
-import { useEffect, useState } from "react";
-import { Order } from "../../../../interface/interface";
+import { useContext } from "react";
+import { ListDeliveryContext } from "../../../../contexts/ListDeliveryContext";
 
 export function ListCatalog() {
 
-    const catalogList = CatalogService
-
-    const [listOrderDelivery, setListOrderDelivery] = useState<Order[]>([])
-
-    function handleAddToCart(item: any) {
-        let list = [...listOrderDelivery];
-        let changedItem = list.find((el) => el.id === item.id)
-
-        if (changedItem) {
-            list.map(product => {
-                if (product.id === item.id) {
-                    product.quantity = product.quantity + 1
-                }
-            })
-
-        } else {
-            item.quantity = item.quantity + 1
-            list.push(item)
-        }
-        setListOrderDelivery(list)
-    }
-
-    function handleRemoveFromCart(item: any) {
-        let findItem = listOrderDelivery.find(item => item.id = item.id)
-        let list = [...listOrderDelivery]
-
-        if (findItem?.quantity && findItem?.quantity > 1) {
-            list.map(resp => {
-                if (resp.id === item.id) {
-                    resp.quantity = item.quantity - 1
-
-                    if (resp.quantity == 0) {
-                        list = list.filter(el => el.id !== resp.id)
-                    }
-                }
-            })
-        } else {
-            list = list.filter(el => el.id !== item.id)
-        }
-
-        setListOrderDelivery(list)
-    }
-
-    const totalItemDelivery = listOrderDelivery.reduce((total, current) => {
-        return total + (current.price * current.quantity)
-    }, 0)
-
-    function updatedList() {
-        let list = [...listOrderDelivery]
-
-        catalogList.map(item => {
-            let itemEncontrado = list.find(resp => resp.id === item.id)
-            if (itemEncontrado) {
-                item.quantity = itemEncontrado.quantity
-            }
-        })
-    }
-
-    useEffect(() => {
-        updatedList()
-    }, [listOrderDelivery])
-
+    const { catalogList, handleAddToCart, handleRemoveFromCart } = useContext(ListDeliveryContext)
 
     return (
         <>
             <div className="listCatalog">
-                {catalogList.map(item => {
+                {catalogList.map((item: any) => {
                     return (
                         <CatalogItem key={item.title}>
                             <img src={`src/assets/coffee/${item.nameImg}`} />
 
                             <div className="tag">
-                                {item.tag.map(tag => {
+                                {item.tag.map((tag: any) => {
                                     return <span className="itemTag" key={tag.id}>{tag.name}</span>
                                 })}
                             </div>

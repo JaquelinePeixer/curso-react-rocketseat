@@ -2,8 +2,19 @@ import { CheckoutCard, CheckoutContainer, ItemOptionPayment, OrderItem, ResumeDe
 import { CurrencyDollar, MapPinLine, CreditCard, Bank, Money, Minus, Plus, Trash } from 'phosphor-react';
 import PaymentService from '../../service/PaymentService.json'
 import { AmountCart } from "../Home/components/ListCatalog/styles";
+import { useContext } from "react";
+import { ListDeliveryContext } from "../../contexts/ListDeliveryContext";
 
 export function Checkout() {
+
+    const { listOrderDelivery } = useContext(ListDeliveryContext)
+
+    const totalItemDelivery = listOrderDelivery.reduce((total, current) => {
+        return total + (current.price * current.quantity)
+    }, 0)
+
+    const valueFrete = 3.5
+    const valorTotalDelivery = totalItemDelivery + valueFrete
 
     let quantity = 1
 
@@ -154,17 +165,17 @@ export function Checkout() {
                         <TotalDelivery>
                             <ResumeDelivery>
                                 <p>Total de itens</p>
-                                <p>R$ 29,70</p>
+                                <p>{totalItemDelivery.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</p>
                             </ResumeDelivery>
 
                             <ResumeDelivery>
                                 <p>Entrega</p>
-                                <p>R$ 3,50</p>
+                                <p>{valueFrete.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</p>
                             </ResumeDelivery>
 
                             <ResumeDelivery>
                                 <p className="totalFinal">Total</p>
-                                <p className="totalFinal">R$ 33,20</p>
+                                <p className="totalFinal">{valorTotalDelivery.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</p>
                             </ResumeDelivery>
                         </TotalDelivery>
 
