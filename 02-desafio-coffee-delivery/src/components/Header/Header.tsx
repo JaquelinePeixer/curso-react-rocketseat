@@ -6,9 +6,14 @@ import { ListDeliveryContext } from "../../contexts/ListDeliveryContext";
 
 export function Header() {
 
-    const { listOrderDelivery } = useContext(ListDeliveryContext)
+    const { finishedOrderDelivery } = useContext(ListDeliveryContext)
 
-    let location = 'Porto Alegre, SC'
+    let location: string
+    if (finishedOrderDelivery?.andressDelivery) {
+        location = `${finishedOrderDelivery.andressDelivery.city}/${finishedOrderDelivery.andressDelivery.uf}`
+    } else {
+        location = 'A definir'
+    }
 
     return (
         <HeaderContainer >
@@ -22,7 +27,7 @@ export function Header() {
                     <MapPin size={22} weight="fill" />  {location}
                 </button>
 
-                <NavLink className="btn light-secondary" to="/checkout"  title="Ir para carrinho de compras">
+                <NavLink className="btn light-secondary" to="/checkout" title="Ir para carrinho de compras">
                     <ShoppingCart size={22} />
                 </NavLink>
             </nav>

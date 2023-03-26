@@ -1,4 +1,4 @@
-import { TemplateDefaultContainer } from "../../../layout/sytles"
+import { TemplateDefaultContainer } from "../../layout/sytles"
 import { FooterContainer } from "./styles"
 
 export function Footer() {

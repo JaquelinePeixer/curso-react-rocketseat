@@ -1,10 +1,13 @@
 import { createContext, ReactNode, useEffect, useState } from "react"
-import { Order } from "../interface/interface"
+import { useNavigate } from "react-router-dom"
+import { Order, OrderList } from "../interface/interface"
 import CatalogService from '../service/CatalogService.json'
 
 interface ListDeliveryContextType {
     catalogList: any,
-    listOrderDelivery: Order[],
+    listOrderDelivery: any,
+    finishedOrderDelivery: any,
+    salveData: (dados: OrderList) => void,
     handleAddToCart: (item: any) => void,
     handleRemoveFromCart: (item: any) => void
 }
@@ -19,6 +22,8 @@ export function ListDeliveryContextProvider({ children }: ListDeliveryProviderPr
 
     const catalogList = CatalogService
     const [listOrderDelivery, setListOrderDelivery] = useState<Order[]>([])
+    const [finishedOrderDelivery, setFinishedOrderDelivery] = useState({})
+    const navigate = useNavigate()
 
     function handleAddToCart(item: any) {
         let list = [...listOrderDelivery];
@@ -41,25 +46,24 @@ export function ListDeliveryContextProvider({ children }: ListDeliveryProviderPr
     function handleRemoveFromCart(item: any) {
         let findItem = listOrderDelivery.find(item => item.id = item.id)
         let list = [...listOrderDelivery]
-        debugger
+
         if (findItem?.quantity && findItem?.quantity > 1) {
             list.map(resp => {
                 if (resp.id === item.id) {
                     resp.quantity = item.quantity - 1
-                    debugger
                     if (resp.quantity == 0) {
                         list = list.filter(el => el.id !== resp.id)
                     }
                 }
             })
         } else {
+            item.quantity = item.quantity - 1
             list = list.filter(el => el.id !== item.id)
         }
 
         setListOrderDelivery(list)
     }
-
-
+    
     function updatedList() {
         let list = [...listOrderDelivery]
 
@@ -70,14 +74,19 @@ export function ListDeliveryContextProvider({ children }: ListDeliveryProviderPr
             }
         })
     }
+    
+    function salveData(dados: OrderList){
+        setFinishedOrderDelivery(dados)
+        navigate("/success")
+    }
 
     useEffect(() => {
         updatedList()
     }, [listOrderDelivery, setListOrderDelivery])
 
     return (
-        <ListDeliveryContext.Provider 
-        value={{ catalogList, handleAddToCart, handleRemoveFromCart, listOrderDelivery }}>
+        <ListDeliveryContext.Provider
+            value={{ catalogList, handleAddToCart, handleRemoveFromCart, listOrderDelivery, salveData, finishedOrderDelivery }}>
             {children}
         </ListDeliveryContext.Provider>
     )

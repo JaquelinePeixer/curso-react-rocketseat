@@ -1,25 +1,12 @@
 import { Card, SuccessContainer } from "./styles";
 import { MapPin, Timer, CurrencyDollar } from 'phosphor-react';
+import { useContext } from "react";
+import { ListDeliveryContext } from "../../contexts/ListDeliveryContext";
 
 export function Success() {
 
-    let pedido = {
-        adress: {
-            zip: "60130240",
-            street: "Rua João Daniel Martinelli",
-            numberStreet: "102",
-            neighborhood: "Farrapos",
-            city: "Porto Alegre",
-            uf: "SP",
-            zipType: "logradouro",
-            complement: "De 2 Até 1550 Lado Par"
-        },
-        deliveryTimer: "20min - 30min",
-        payment: {
-            id: 1,
-            name: "Cartão de crédito"
-        }
-    }
+    const { finishedOrderDelivery } = useContext(ListDeliveryContext)
+    finishedOrderDelivery.deliveryTimer = "20min - 30min"
 
     return (
         <SuccessContainer className="section">
@@ -33,8 +20,8 @@ export function Success() {
                             <MapPin size={16} weight="fill" />
                         </div>
                         <div>
-                            <p>Entrega em <strong>{pedido.adress.street}</strong></p>
-                            <p>{pedido.adress.neighborhood} - {pedido.adress.city}, {pedido.adress.uf}</p>
+                            <p>Entrega em <strong>{finishedOrderDelivery.andressDelivery.street}, {finishedOrderDelivery.andressDelivery.numberStreet}</strong></p>
+                            <p>{finishedOrderDelivery.andressDelivery.neighborhood} - {finishedOrderDelivery.andressDelivery.city}, {finishedOrderDelivery.andressDelivery.uf}</p>
                         </div>
                     </div>
 
@@ -44,7 +31,7 @@ export function Success() {
                         </div>
                         <div>
                             <p>Previsão de entrega</p>
-                            <p><strong>{pedido.deliveryTimer}</strong></p>
+                            <p><strong>{finishedOrderDelivery.deliveryTimer}</strong></p>
                         </div>
                     </div>
 
@@ -54,7 +41,7 @@ export function Success() {
                         </div>
                         <div>
                             <p>Pagamento na entrega</p>
-                            <p><strong>{pedido.payment.name}</strong></p>
+                            <p><strong>{finishedOrderDelivery.paygmentDelivery}</strong></p>
                         </div>
                     </div>
                 </Card>

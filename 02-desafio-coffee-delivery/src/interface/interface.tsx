@@ -2,7 +2,7 @@ export interface OrderList {
     id: number,
     order: Order[],
     andressDelivery?: Adress,
-    paygmentDeivery?: Payment,
+    paygmentDelivery?: string,
     deliveryTimer?: string
 }
 
@@ -28,7 +28,6 @@ export interface Adress {
     neighborhood: string,
     city: string,
     uf: string
-    zipType: string,
     complement: string
 }
 

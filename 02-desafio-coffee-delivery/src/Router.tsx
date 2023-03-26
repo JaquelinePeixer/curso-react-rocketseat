@@ -1,6 +1,6 @@
 import { Route } from "react-router";
 import { Routes } from "react-router-dom";
-import { TemplateDefault } from "./layout/templateDefault";
+import { TemplateDefault } from "./layout/TemplateDefault";
 import { Checkout } from "./pages/Checkout/Checkout";
 import { Home } from "./pages/Home/Home";
 import { Success } from "./pages/Success/Success";

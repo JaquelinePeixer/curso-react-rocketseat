@@ -2,6 +2,7 @@ import { AmountCart, CatalogItem } from "./styles";
 import { ShoppingCart, Minus, Plus } from 'phosphor-react';
 import { useContext } from "react";
 import { ListDeliveryContext } from "../../../../contexts/ListDeliveryContext";
+import { NavLink } from "react-router-dom";
 
 export function ListCatalog() {
 
@@ -27,7 +28,7 @@ export function ListCatalog() {
                             <AmountCart className="shoppingCartItemCatalog">
                                 <div className="price">
                                     <label >R$</label>
-                                    <label className="currency">{item.price}</label>
+                                    <label className="currency">{item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</label>
                                 </div>
 
                                 <div className="amountCart">
@@ -40,13 +41,11 @@ export function ListCatalog() {
                                             <Plus size={14} weight="light" />
                                         </button>
                                     </div>
-                                    <button className="btn primary">
+                                    <NavLink className="btn primary" to="/checkout" title="Ir para carrinho de compras">
                                         <ShoppingCart color={'white'} size={16} weight="fill" />
-                                    </button>
+                                    </NavLink>
                                 </div>
-
                             </AmountCart>
-
                         </CatalogItem>
                     )
                 })}

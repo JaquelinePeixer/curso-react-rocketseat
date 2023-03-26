@@ -1,65 +1,63 @@
 import { CheckoutCard, CheckoutContainer, ItemOptionPayment, OrderItem, ResumeDelivery, TotalDelivery } from "./styles";
-import { CurrencyDollar, MapPinLine, CreditCard, Bank, Money, Minus, Plus, Trash } from 'phosphor-react';
+import { CurrencyDollar, MapPinLine, CreditCard, Bank, Money, Minus, Plus } from 'phosphor-react';
 import PaymentService from '../../service/PaymentService.json'
 import { AmountCart } from "../Home/components/ListCatalog/styles";
 import { useContext } from "react";
 import { ListDeliveryContext } from "../../contexts/ListDeliveryContext";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as zod from 'zod';
+
+const newOrderDeliveryValidationSchema = zod.object({
+    zip: zod.string().min(6, { message: "Informe o CEP!" }),
+    street: zod.string().min(1, "Informe o endereço!"),
+    numberStreet: zod.string().min(1, "Informe o número de sua residência!"),
+    neighborhood: zod.string().min(1, "Informe o bairro!"),
+    city: zod.string().min(1, "Informe a cidade!"),
+    uf: zod.string().min(1, "Informe o estado!").max(2, "Máximo 2 caracteres"),
+    complement: zod.string().min(1, "Ajude a encontrar sua casa. Informe um complemento!"),
+    payment: zod.string(),
+})
 
 export function Checkout() {
 
-    const { listOrderDelivery } = useContext(ListDeliveryContext)
+    const { register, handleSubmit, watch, formState: { errors } } = useForm({
+        resolver: zodResolver(newOrderDeliveryValidationSchema)
+    })
 
-    const totalItemDelivery = listOrderDelivery.reduce((total, current) => {
+    const { listOrderDelivery, handleAddToCart, handleRemoveFromCart, salveData } = useContext(ListDeliveryContext)
+
+    const totalItemDelivery = listOrderDelivery.reduce((total: any, current: any) => {
         return total + (current.price * current.quantity)
     }, 0)
 
     const valueFrete = 3.5
     const valorTotalDelivery = totalItemDelivery + valueFrete
 
-    let quantity = 1
-
     let listPayment = PaymentService
 
-    let listDelivery = [
-        {
-            id: 1,
-            nameImg: 'expresso.svg',
-            tag: [
-                {
-                    id: 1,
-                    name: 'Tradicional'
-                }
-            ],
-            title: 'Expresso Tradicional',
-            subtitle: 'O tradicional café feito com água quente e grãos moídos',
-            price: 9.90
-        },
-        {
-            id: 5,
-            nameImg: 'cafe-com-leite.svg',
-            tag: [
-                {
-                    id: 1,
-                    name: 'Tradicional'
-                },
-                {
-                    id: 2,
-                    name: 'Com leite'
-                }
-            ],
-            title: 'Café com Leite',
-            subtitle: 'Meio a meio de expresso tradicional com leite vaporizado',
-            price: 9.90
+    function onSubmitDeliveryOrder(data: any) {
+        let order = {
+            id: new Date().getTime(),
+            order: listOrderDelivery,
+            andressDelivery: {
+                zip: data.zip,
+                street: data.street,
+                numberStreet: data.numberStreet,
+                neighborhood: data.neighborhood,
+                city: data.city,
+                uf: data.uf,
+                complement: data.complement
+            },
+            paygmentDelivery: data.payment,
         }
-    ]
-
-    function onSubmit(){
-        debugger
+        salveData(order)
     }
 
     return (
         <div className="section">
-            <CheckoutContainer onSubmit={onSubmit}>
+            <CheckoutContainer onSubmit={handleSubmit(onSubmitDeliveryOrder)}>
+
                 <div>
                     <h3>Complete seu pedido</h3>
 
@@ -74,19 +72,20 @@ export function Checkout() {
                             </div>
                         </div>
                         <div className="formulary">
-                            <input type="text" id="zip" className="col-4" placeholder="CEP" />
 
-                            <input type="text" id="street" className="col-12" placeholder="Endereço" />
+                            <input type="text" id="zip" className="col-4" placeholder="CEP" {...register('zip')} />
+
+                            <input type="text" id="street" className="col-12" placeholder="Endereço" {...register('street')} />
 
                             <div className="row">
-                                <input type="text" id="numberStreet" className="col-4" placeholder="Número" />
-                                <input type="text" id="complement" className="col-8" placeholder="Complemento" />
+                                <input type="text" id="numberStreet" className="col-4" placeholder="Número" {...register('numberStreet')} />
+                                <input type="text" id="complement" className="col-8" placeholder="Complemento" {...register('complement')} />
                             </div>
 
                             <div className="row">
-                                <input type="text" id="neighborhood" className="col-4" placeholder="Bairro" />
-                                <input type="text" id="city" className="col-6" placeholder="Cidade" />
-                                <input type="text" id="uf" className="col-2" placeholder="UF" />
+                                <input type="text" id="neighborhood" className="col-4" placeholder="Bairro" {...register('neighborhood')} />
+                                <input type="text" id="city" className="col-6" placeholder="Cidade" {...register('city')} />
+                                <input type="text" id="uf" className="col-2" placeholder="UF" {...register('uf')} />
                             </div>
                         </div>
 
@@ -106,7 +105,8 @@ export function Checkout() {
                         <div className="optionPayment">
                             {listPayment.map(item => {
                                 return (
-                                    <ItemOptionPayment key={'option-payment-' + item.id} className="active">
+                                    <ItemOptionPayment key={'option-payment-' + item.id} className={watch('payment') === item.name ? 'active' : ''}>
+                                        <input type="radio" value={item.name} {...register("payment")} hidden />
                                         <div className="cardIcon">
                                             {item.name === "Cartão de crédito" && <CreditCard size={16} />}
                                             {item.name === "Cartão de débito" && <Bank size={16} />}
@@ -127,7 +127,7 @@ export function Checkout() {
                     <CheckoutCard className="order">
                         <div className="orderList">
 
-                            {listDelivery.map(item => {
+                            {listOrderDelivery.map((item: any) => {
                                 return (
                                     <OrderItem key={'order-item-' + item.id}>
                                         <img src={`src/assets/coffee/${item.nameImg}`} />
@@ -136,24 +136,22 @@ export function Checkout() {
                                             <AmountCart className="shoppingCartItemCatalog">
                                                 <div className="amountCart">
                                                     <div className="amount">
-                                                        <button>
+                                                        <button onClick={() => handleRemoveFromCart(item)} type="button" title={'Remover ' + item.title} >
                                                             <Minus size={14} weight="light" />
                                                         </button>
-                                                        <span>{quantity}</span>
-                                                        <button>
+                                                        <span>{item.quantity}</span>
+                                                        <button onClick={() => handleAddToCart(item)} type="button" title={'Adicionar ' + item.title}>
                                                             <Plus size={14} weight="light" />
                                                         </button>
                                                     </div>
-                                                    <button className="btn">
-                                                        <Trash size={16} /> Remover
-                                                    </button>
+
                                                 </div>
                                             </AmountCart>
                                         </div>
 
                                         <AmountCart className="shoppingCartItemCatalog">
                                             <div className="price">
-                                                <label className="currencyValue">R$ {item.price}</label>
+                                                <label className="currencyValue">R$ {(item.price * item.quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</label>
                                             </div>
                                         </AmountCart>
 
@@ -165,17 +163,17 @@ export function Checkout() {
                         <TotalDelivery>
                             <ResumeDelivery>
                                 <p>Total de itens</p>
-                                <p>{totalItemDelivery.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</p>
+                                <p>{totalItemDelivery.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                             </ResumeDelivery>
 
                             <ResumeDelivery>
                                 <p>Entrega</p>
-                                <p>{valueFrete.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</p>
+                                <p>{valueFrete.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                             </ResumeDelivery>
 
                             <ResumeDelivery>
                                 <p className="totalFinal">Total</p>
-                                <p className="totalFinal">{valorTotalDelivery.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</p>
+                                <p className="totalFinal">{valorTotalDelivery.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                             </ResumeDelivery>
                         </TotalDelivery>
 
@@ -183,7 +181,7 @@ export function Checkout() {
                     </CheckoutCard>
 
                 </div>
-            </CheckoutContainer>
-        </div>
+            </CheckoutContainer >
+        </div >
     )
 }

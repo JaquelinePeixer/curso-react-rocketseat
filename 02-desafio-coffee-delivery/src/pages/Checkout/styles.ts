@@ -123,7 +123,7 @@ export const TotalDelivery = styled.div`
     }
 `
 
-export const ItemOptionPayment = styled.div`
+export const ItemOptionPayment = styled.label`
     display: flex;
     align-items: center;
     gap: 12px;
