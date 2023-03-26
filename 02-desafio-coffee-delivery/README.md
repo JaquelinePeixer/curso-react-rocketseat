@@ -1,4 +1,4 @@
-# [Em desenvolvimento] Coffee Delivery - Desafio 02 Ignite
+# Coffee Delivery - Desafio 02 Ignite
 ![Capa Coffee Delivery](Capa.png)
 
 # Sobre o desafio
