@@ -17,4 +17,19 @@ export const HeaderContainer = styled.section`
         align-items: center;
         gap: 12px;
     }
+
+    .badge{
+        width: 20px;
+        height: 20px;
+        display: flex;
+        font-size: 10px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 999px;
+        background-color: ${props => props.theme['secondary']};
+        color: ${props => props.theme['white']};
+        float: right;
+        margin-left: -9px;
+        margin-top: -8px;
+    }
 ` 
