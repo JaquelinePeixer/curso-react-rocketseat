@@ -1,4 +1,4 @@
-# [Em desenvolvimento] Aula 03 - DT Money
+# Aula 03 - DT Money
 ![Capa DT Money](Capa.png)
 
 # Sobre a aula - Consumo de API e performance no ReactJS
