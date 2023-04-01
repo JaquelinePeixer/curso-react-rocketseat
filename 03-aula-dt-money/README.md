@@ -9,11 +9,13 @@ Revisão de conhecimentos:
 
 - Estados
 - ContextAPI
-- Imutabilidade do estado
+- Reduce
+- useForm
 
 Funcionalidades aprendidas:
 
 - Consumo de API Rest com [json-server](https://github.com/typicode/json-server)
+- Hooks personalizados
 
 # Layout da aplicação
 

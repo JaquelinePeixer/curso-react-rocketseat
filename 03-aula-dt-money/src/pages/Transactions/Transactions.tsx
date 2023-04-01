@@ -1,43 +1,46 @@
-import { Header } from "../../components/Header/Header";
-import { Summary } from "../../components/Summary/Summary";
-import { SearchForm } from "./components/SearchForm/SearchForm";
-import { PriceHighlight, TransactionsContainer, TransactionsTable } from "./styles";
-
+import { useContext } from 'react'
+import { Header } from '../../components/Header/Header'
+import { Summary } from '../../components/Summary/Summary'
+import { SearchForm } from './components/SearchForm/SearchForm'
+import {
+  PriceHighlight,
+  TransactionsContainer,
+  TransactionsTable,
+} from './styles'
+import { TransactionsContext } from '../../contexts/TransactionsContext'
+import { dateFormatter, priceFormatter } from '../../utils/formatter'
 
 export function Transactions() {
-    return (
-        <>
-            <Header />
-            <Summary />
+  const { transactions } = useContext(TransactionsContext)
 
-            <TransactionsContainer>
-                <SearchForm />
+  return (
+    <>
+      <Header />
+      <Summary />
 
-                <TransactionsTable>
-                    <tbody>
-                        <tr>
-                            <td>Desenvolvimento de site</td>
-                            <td>
-                                <PriceHighlight variant="income">
-                                    R$ 12.000,00
-                                </PriceHighlight>
-                            </td>
-                            <td>Vendas</td>
-                            <td>13/04/2022</td>
-                        </tr>
-                        <tr>
-                            <td>Hamburguer</td>
-                            <td>
-                                <PriceHighlight variant="outcome">
-                                    - R$ 59,00
-                                </PriceHighlight>
-                            </td>
-                            <td>Alimentação</td>
-                            <td>10/04/2022</td>
-                        </tr>
-                    </tbody>
-                </TransactionsTable>
-            </TransactionsContainer>
-        </>
-    )
+      <TransactionsContainer>
+        <SearchForm />
+
+        <TransactionsTable>
+          <tbody>
+            {transactions.map((item) => {
+              return (
+                <tr key={item.id}>
+                  <td>{item.description}</td>
+                  <td>
+                    <PriceHighlight variant={item.type}>
+                      {item.type === 'outcome' && '- '}
+                      {priceFormatter.format(item.price)}
+                    </PriceHighlight>
+                  </td>
+                  <td>{item.category}</td>
+                  <td>{dateFormatter.format(new Date(item.createdAt))}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </TransactionsTable>
+      </TransactionsContainer>
+    </>
+  )
 }
