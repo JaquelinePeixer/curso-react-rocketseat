@@ -16,6 +16,7 @@ Funcionalidades aprendidas:
 
 - Consumo de API Rest com [json-server](https://github.com/typicode/json-server)
 - Hooks personalizados
+- Hooks React (useCallback, memo, useMemo)
 
 # Layout da aplicação
 
