@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
 
-    body, input {
+    body, input, button {
         font-family: 'Nunito', sans-serif;
         background-color: ${props => props.theme['base-background']};
         color: ${props => props.theme['base-subtitle']};

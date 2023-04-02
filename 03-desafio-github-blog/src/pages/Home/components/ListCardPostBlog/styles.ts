@@ -8,9 +8,16 @@ export const ListCardPostBlogContainer = styled.section`
     margin-top: 48px;
 `
 
-export const CardPostBlog = styled.div`
+export const CardPostBlog = styled.button`
     background-color: ${props => props.theme['base-post']};
     padding: 32px;
+    border: 0;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
 
     .display-flex {
         gap: 16px;
@@ -23,7 +30,7 @@ export const CardPostBlog = styled.div`
     }
 
     span {
-        flex: 1;
+        line-height: 1.5;
     }
 
     p{        
