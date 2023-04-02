@@ -5,6 +5,7 @@ import { Router } from "./Router";
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
 import { defaultTheme } from "./styles/theme/default";
+import { GithubProvider } from "./contexts/GithubContext";
 
 export function App() {
   return (
@@ -13,7 +14,9 @@ export function App() {
 
       <BrowserRouter>
         <Header />
-        <Router />
+        <GithubProvider>
+          <Router />
+        </GithubProvider>
         <Footer />
       </BrowserRouter>
     </ThemeProvider>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.section`
     background-image: url('src/assets/background-header.svg');
-    background-position: top center;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
