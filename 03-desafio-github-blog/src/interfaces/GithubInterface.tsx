@@ -16,3 +16,8 @@ export interface Profile {
     followers: number,
     url: string
 }
+
+export interface Issues {
+    items: any,
+    total_count: number
+}

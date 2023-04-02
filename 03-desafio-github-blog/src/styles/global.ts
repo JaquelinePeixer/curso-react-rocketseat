@@ -15,22 +15,6 @@ export const GlobalStyle = createGlobalStyle`
         font-size: 1rem;
     }
 
-    input {
-        background-color: ${props => props.theme['base-background']};
-        border: 1px solid ${props => props.theme['base-border']};        
-        padding: 12px 16px;
-        color: ${props => props.theme['base-text']};
-
-        &::placeholder{
-            color: ${props => props.theme['base-label']};
-        }
-
-        &:active{ 
-            outline: none;
-            border-color: ${props => props.theme['blue']};
-        }
-    }
-
     a {
         color: ${props => props.theme['blue']};
         font-weight: bold;
@@ -56,6 +40,12 @@ export const GlobalStyle = createGlobalStyle`
     
     .content {
         color: ${props => props.theme['base-text']};
+    }
+
+    .display-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
 `

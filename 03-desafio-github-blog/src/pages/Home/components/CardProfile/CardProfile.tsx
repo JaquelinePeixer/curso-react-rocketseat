@@ -2,7 +2,6 @@ import { CardProfilecontainer, ContentProfile, LinkProfile } from "./styles";
 import { useContext, useEffect } from "react";
 import { GithubContext } from "../../../../contexts/GithubContext";
 
-
 import { faArrowUpRightFromSquare, faUserGroup, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";

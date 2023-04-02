@@ -22,12 +22,6 @@ export const ContentProfile = styled.div`
 
     display: flex;
     flex-direction: column;
-
-    .display-flex{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
     
     .flex-1{
         flex: 1;
