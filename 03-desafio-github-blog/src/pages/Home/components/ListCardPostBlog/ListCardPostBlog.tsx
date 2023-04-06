@@ -14,15 +14,11 @@ export function ListCardPostBlog() {
         navigate(`/post-blog/${idIssue}`)
     }
 
-    useEffect(() => {
-        // console.log(postBlog)
-    }, [postBlog])
-
     return (
         <ListCardPostBlogContainer>
             {postBlog.map((item: any) => {
                 return (
-                    <CardPostBlog key={item.id} type="button" onClick={() => gotPostBlog(item.number)}>
+                    <CardPostBlog key={item.id} type="button" onClick={() => gotPostBlog(item.number)} title={item.title}>
                         <div className="display-flex">
                             <h1>{item.title}</h1>
                             <span>

@@ -4,7 +4,7 @@ export interface PostBlog {
     createdAt: string,
     user: Profile,
     url: string,
-    comments: number 
+    comments: number
 }
 
 export interface Profile {
@@ -20,4 +20,13 @@ export interface Profile {
 export interface Issues {
     items: any,
     total_count: number
+}
+
+export interface PostBlogUnit {
+    url: string,
+    title: string,
+    user: { login: string },
+    created_at: string,
+    comments: number,
+    body: string,
 }

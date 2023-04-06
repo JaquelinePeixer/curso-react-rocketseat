@@ -10,11 +10,6 @@ export function CardProfile() {
 
     const { dataProfile } = useContext(GithubContext)
 
-
-    useEffect(() => {
-
-    }, [])
-
     return (
         <CardProfilecontainer>
             <img src={dataProfile.avatar} alt="" />
