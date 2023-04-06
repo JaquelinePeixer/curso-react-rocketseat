@@ -1,4 +1,4 @@
-# [Em desenvolvimento] Github Blog - Desafio 03 Ignite
+# Github Blog - Desafio 03 Ignite
 ![Capa Github Blog](Capa.png)
 
 # Sobre o desafio
